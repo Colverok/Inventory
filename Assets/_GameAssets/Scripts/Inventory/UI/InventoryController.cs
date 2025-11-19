@@ -15,10 +15,14 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private InventoryView view;
     [SerializeField] private InventoryDefaultUseHandler useHandler;
 
+    private InventorySelection inventorySelection;
     private InventoryModel inventoryModel;
+
+    public event Action<int> SelectionChanged;
 
     #region Properties
     public InventoryModel InventoryModel { get => inventoryModel; private set => inventoryModel = value; }
+    public InventorySelection InventorySelection { get => inventorySelection; set => inventorySelection = value; }
     #endregion
 
     // monobeh
@@ -26,6 +30,7 @@ public class InventoryController : MonoBehaviour
     private void Awake()
     {
         inventoryModel = new InventoryModel(db, rows, cols);
+        inventorySelection = new InventorySelection();
         inventoryModel.OnSlotChanged += OnSlotChanged;
 
         view.Init(this);
@@ -62,6 +67,16 @@ public class InventoryController : MonoBehaviour
         InventoryModel.Add(new InventorySlot(item.Id, 1));
     }
 
+    public void RequestSelect(int index)
+    {
+        InventorySelection.Select(index);
+        SelectionChanged?.Invoke(index);
+    }
+    public void RequestClearSelection()
+    {
+        InventorySelection.Clear();
+        SelectionChanged?.Invoke(-1);
+    }
 
 
     // Sorting

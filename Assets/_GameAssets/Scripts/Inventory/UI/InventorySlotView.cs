@@ -19,7 +19,7 @@ public class InventorySlotView : MonoBehaviour,
     [SerializeField] private Image iconImage;
     [SerializeField] private GameObject countObject;
     [SerializeField] private TextMeshProUGUI countText;
-    [SerializeField] private Button dropButton;
+    [SerializeField] private Image selectionFrame;
 
 
     private int index;
@@ -27,6 +27,7 @@ public class InventorySlotView : MonoBehaviour,
     private InventorySlot _slot;
     private DragGhost ghost;
     private TooltipView tooltip;
+    private bool isSelected;
 
     private float lastClickTime;
     private const float doubleClickDelay = 0.25f;
@@ -38,10 +39,26 @@ public class InventorySlotView : MonoBehaviour,
         this.controller = controller;
         this.ghost = ghost;
         this.tooltip = tooltip;
-        if (dropButton && controller)
-            dropButton.onClick.AddListener(() => controller.RequestDrop(index));
+        if (controller != null)
+            controller.SelectionChanged += HandleSelectionChanged;
+    }
+    private void OnDestroy()
+    {
+        if (controller != null)
+            controller.SelectionChanged -= HandleSelectionChanged;
     }
 
+    private void HandleSelectionChanged(int newIndex)
+    {
+        SetSelected(index == newIndex);
+    }
+    private void SetSelected(bool value)
+    {
+        isSelected = value;
+
+        if (selectionFrame != null)
+            selectionFrame.gameObject.SetActive(isSelected);
+    }
     public void SetData(InventorySlot slot)
     {
         _slot = slot;
@@ -49,7 +66,7 @@ public class InventorySlotView : MonoBehaviour,
         {
             iconImage.enabled = false;
             countObject.SetActive(false);
-            dropButton.gameObject.SetActive(false);
+            if (selectionFrame != null) selectionFrame.gameObject.SetActive(false);
         }
         else
         {
@@ -58,7 +75,6 @@ public class InventorySlotView : MonoBehaviour,
             iconImage.sprite = item.Icon;
             bool showCount = item != null && item.Stackable && slot.Count > 1;
             countObject.SetActive(showCount);
-            dropButton.gameObject.SetActive(true);
             if (showCount) countText.text = slot.Count.ToString();
         }
     }
@@ -107,6 +123,10 @@ public class InventorySlotView : MonoBehaviour,
         if (t - lastClickTime < doubleClickDelay)
         {
             controller.RequestUse(index);
+        }
+        else
+        {
+            controller.RequestSelect(index);
         }
         lastClickTime = t;
     }
