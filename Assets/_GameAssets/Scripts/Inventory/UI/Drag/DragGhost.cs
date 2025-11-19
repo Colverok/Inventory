@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Visual indicator shown during drag 
+/// Visual indicator shown during drag.
 /// Follows cursor in the canvas space and displays the dragged item icon.
 /// Keeps temporary drag state (source index, payload) until drop is completed.
 /// </summary>
@@ -31,8 +31,7 @@ public class DragGhost : MonoBehaviour
         RectTransform rect = transform as RectTransform;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, screenPos, 
             canvas.worldCamera, out var local);
-        (transform as RectTransform).anchoredPosition = local;
-
+        rect.anchoredPosition = local;
     }
 
     public void End()

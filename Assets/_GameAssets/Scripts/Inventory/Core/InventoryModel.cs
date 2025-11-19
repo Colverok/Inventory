@@ -59,10 +59,16 @@ public class InventoryModel
     public InventorySlot GetSlot(int index) => slots[index];
 
     /// <summary>
-    /// Add one slot to inventory
+    /// Adds items to the inventory, first trying to merge them into existing
+    /// compatible stacks, and then placing any remaining items into empty slots.
     /// </summary>
-    /// <param name="addingSlot"></param>
-    /// <returns>Returns true, if operation is valid</returns>
+    /// <param name="addingSlot">
+    /// Slot containing the item ID and amount to add.  
+    /// </param>
+    /// <returns>
+    /// True if all items were successfully placed into the inventory;  
+    /// false if there was not enough free space or stack capacity.
+    /// </returns>
     public bool Add(InventorySlot addingSlot)
     {
         if (addingSlot.IsEmpty) return false;
@@ -101,6 +107,15 @@ public class InventoryModel
         return addingSlot.Count == 0;
     }
 
+    /// <summary>
+    /// Moves items from one slot to another.
+    /// Can merge stacks if the items are compatible. 
+    /// </summary>
+    /// <param name="fromIndex">Index of the source slot to move items from.</param>
+    /// <param name="toIndex">Index of the target slot to move items to.</param>
+    /// <param name="mergeStacks">If true, tries to merge item stacks when they have the same item and
+    /// stacking is allowed; otherwise the slots are simply swapped.</param>
+    /// <returns>True if the inventory state was changed; otherwise, false.</returns>
     public bool Move(int fromIndex, int toIndex, bool mergeStacks = true)
     {
         if (fromIndex == toIndex) return false;
@@ -129,6 +144,14 @@ public class InventoryModel
         SetSlot(fromIndex, toSlot);
         return true;
     }
+
+    /// <summary>
+    /// Removes items from a slot.
+    /// </summary>
+    /// <param name="index">Index of the slot to remove items from.</param>
+    /// <param name="amount">Maximum number of items to remove. If greater than or equal to the
+    /// current stack size, the entire stack is cleared.</param>
+    /// <returns>True if any items were removed; otherwise, false.</returns>
     public bool Drop(int index, int amount = int.MaxValue)
     {
         InventorySlot slot = slots[index];
@@ -146,11 +169,15 @@ public class InventoryModel
         }
     }
 
-    public bool Split(int from, int to, int amount)
-    {
-        return false;
-    }
-
+    /// <summary>
+    /// Attempts to use the item in the given slot via the provided use handler.
+    /// If the handler reports success, the item stack is decreased or the slot
+    /// is cleared for non-stackable items.
+    /// </summary>
+    /// <param name="index">Index of the slot whose item should be used.</param>
+    /// <param name="handler">Object responsible for handling item usage and reporting whether the
+    /// item was successfully consumed or activated.</param>
+    /// <returns>True if the item was successfully used by the handler; otherwise, false.</returns>
     public bool Use(int index, IInventoryItemUseHandler handler)
     {
         InventorySlot slot = slots[index];
@@ -175,10 +202,16 @@ public class InventoryModel
         return used;
     }
     /// <summary>
-    /// Sort inventory by some key
+    /// Sorts slots in the inventory using a key selector 
+    /// keeping empty slots at the end.
     /// </summary>
-    /// <param name="selector">Example: x => x.itemId </param>
-    /// <param name="ascending"></param>
+    /// <param name="selector">
+    /// Function that selects a sort key from a slot
+    /// (for example: <c>x => x.Count</c>).
+    /// </param>
+    /// <param name="ascending">
+    /// If true, sorts in ascending order; if false, sorts in descending order.
+    /// </param>
     public void SortBy(Func<InventoryItemSO, object> selector, bool ascending = true)
     {
         List<InventorySlot> sorted = new List<InventorySlot>(slots);
@@ -221,9 +254,13 @@ public class InventoryModel
             SetSlot(i, sorted[i]);
         }
     }
-
-
-
+    
+    /// <summary>
+    /// Restores the inventory state from a previously saved array of slots.
+    /// </summary>
+    /// <param name="saved">
+    /// Array of previously saved slots.
+    /// </param>
     public void Restore(InventorySlot[] saved)
     {
         for (int i = 0; i < saved.Length; i++)
@@ -243,10 +280,10 @@ public class InventoryModel
         OnSlotChanged?.Invoke(index, slot);
     }
 
-    private bool CanStack(InventorySlot a, InventorySlot b)
+    private bool CanStack(InventorySlot slotA, InventorySlot slotB)
     {
-        if (a.IsEmpty || b.IsEmpty || a.ItemId != b.ItemId) return false;
-        InventoryItemSO item = db.GetItemById(a.ItemId);
+        if (slotA.IsEmpty || slotB.IsEmpty || slotA.ItemId != slotB.ItemId) return false;
+        InventoryItemSO item = db.GetItemById(slotA.ItemId);
         return item != null && item.Stackable; 
     }
     

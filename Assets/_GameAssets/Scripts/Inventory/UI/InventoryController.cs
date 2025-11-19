@@ -103,7 +103,6 @@ public class InventoryController : MonoBehaviour
     public void ClearSaves() => InventorySaveService.Clear();
     #endregion
 
-
     private void OnSlotChanged(int index, InventorySlot slot)
     {
         view.UpdateSlot(index, slot);

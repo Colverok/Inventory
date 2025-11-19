@@ -22,7 +22,6 @@ public class InventoryItemSO : ScriptableObject
     [SerializeField] private int maxStack = 99;
 
     #region Properties
-
     public string Id { get => id; set => id = value; }
     public string DisplayName { get => displayName; set => displayName = value; }
     public Sprite Icon { get => icon; set => icon = value; }

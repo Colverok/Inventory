@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -13,6 +11,7 @@ public class TooltipView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private TextMeshProUGUI type;
     [SerializeField] private Canvas canvas;
+    private float offset = 0.5f;
 
     private void Awake()
     {
@@ -25,14 +24,18 @@ public class TooltipView : MonoBehaviour
         description.text = item.Description;
         type.text = item.Type.ToString();
 
+        SetPosition(anchor);
+    }
 
+    private void SetPosition(RectTransform anchor)
+    {
         RectTransform rect = transform as RectTransform;
-        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(null, anchor.position);
+        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, anchor.position);
         RectTransform canvasRect = canvas.transform as RectTransform;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, 
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect,
             screenPos, canvas.worldCamera, out var localPoint);
         rect.SetParent(canvasRect, false);
-        rect.anchoredPosition = localPoint + new Vector2(rect.rect.width * 0.5f, -rect.rect.height * 0.5f);
+        rect.anchoredPosition = localPoint + new Vector2(rect.rect.width * offset, -rect.rect.height * offset);
         canvasGroup.alpha = 1f;
     }
 

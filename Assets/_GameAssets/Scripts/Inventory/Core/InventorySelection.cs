@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class InventorySelection
 {
-    private int selectedIndex;
-
+    private int selectedIndex = -1;
     public int SelectedIndex { get => selectedIndex; set => selectedIndex = value; }
     public bool HasSelection => SelectedIndex >= 0;
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemsAdder : MonoBehaviour
+public class InventoryDebugItemsAdder : MonoBehaviour
 {
     [SerializeField] InventoryController inventoryController;
 

@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class InventoryButtonsPanel : MonoBehaviour
 {
-
     [SerializeField] private Button sortByNameButton;
     [SerializeField] private Button sortByTypeButton;
     [SerializeField] private Button sortByCountButton;
