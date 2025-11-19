@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f93443d38536ad244ab4e3ebd1a292b5, type: 3}
-  m_Name: Huge Health Potion
+  m_Name: Health Flask
   m_EditorClassIdentifier: 
   id: 38f284c08d1c43c8b650d57a98f90fec
-  displayName: Huge Health Potion
-  icon: {fileID: 21300000, guid: d6a94437dcd1bab4b8c39a16557df773, type: 3}
-  description: Healing health a lot
+  displayName: Health Flask
+  icon: {fileID: 21300000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}
+  description: Heals a portion of your health.
   type: 1
   stackable: 1
   maxStack: 99

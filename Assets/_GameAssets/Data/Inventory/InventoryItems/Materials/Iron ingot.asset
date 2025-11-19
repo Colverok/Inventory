@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Iron ingot
   m_EditorClassIdentifier: 
   id: 29125396989f424a9aa1557026a7ccb2
-  displayName: iron ingot
+  displayName: Iron Ingot
   icon: {fileID: 21300000, guid: 3e4fcc84a0ac95b429c56452575f6021, type: 3}
-  description: heh
+  description: A solid bar of refined iron used for crafting and upgrades.
   type: 3
   stackable: 1
   maxStack: 99

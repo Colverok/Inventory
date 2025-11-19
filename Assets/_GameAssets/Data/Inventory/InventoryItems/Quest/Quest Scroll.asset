@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f93443d38536ad244ab4e3ebd1a292b5, type: 3}
-  m_Name: Bedroll
+  m_Name: Quest Scroll
   m_EditorClassIdentifier: 
   id: 0608ddbfd70347fe8bbb9186c3302f5f
-  displayName: Bedroll
-  icon: {fileID: 21300000, guid: 97cbe9c1056bf94448d1bbef8e195180, type: 3}
-  description: Need to give it
+  displayName: Quest Scroll
+  icon: {fileID: 21300000, guid: db427fab3e94daf4caa704d9314a77a1, type: 3}
+  description: A sealed parchment containing an important quest task.
   type: 2
   stackable: 0
   maxStack: 99

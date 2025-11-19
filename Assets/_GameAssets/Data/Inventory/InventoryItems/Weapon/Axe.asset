@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: efedbc2b59ea40f7ae2db3b8e7c5694f
   displayName: Axe
-  icon: {fileID: 21300000, guid: bb6cd95438ca9534899121bde771d61c, type: 3}
-  description: Axe lol
+  icon: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
+  description: A heavy weapon that deals powerful, cleaving strikes
   type: 0
   stackable: 0
   maxStack: 99

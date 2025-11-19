@@ -21,7 +21,7 @@ public class TooltipView : MonoBehaviour
     }
     public void Show(InventoryItemSO item, int count, RectTransform anchor)
     {
-        title.text = count > 1 ? $"{item.DisplayName}x{count}" : item.DisplayName;
+        title.text = item.DisplayName;
         description.text = item.Description;
         type.text = item.Type.ToString();
 
