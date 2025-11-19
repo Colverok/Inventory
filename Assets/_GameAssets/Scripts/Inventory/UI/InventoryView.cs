@@ -13,11 +13,7 @@ public class InventoryView : MonoBehaviour
     [SerializeField] private InventorySlotView slotPrefab;
     [SerializeField] private DragGhost dragGhost;
     [SerializeField] private TooltipView tooltip;
-    [SerializeField] private Button sortByNameButton;
-    [SerializeField] private Button sortByTypeButton;
-    [SerializeField] private Button sortByCountButton;
-    [SerializeField] private Button dropButton;
-    [SerializeField] private Button useButton;
+    [SerializeField] private InventoryButtonsPanel buttonsPanel;
 
     private InventoryController _controller;
     private readonly List<InventorySlotView> slots = new List<InventorySlotView>();
@@ -34,29 +30,8 @@ public class InventoryView : MonoBehaviour
             slots.Add(slot);
             UpdateSlot(i, controller.InventoryModel.GetSlot(i));
         }
-        if (_controller)
-        {
-            if (sortByNameButton) sortByNameButton.onClick.AddListener(() => _controller.SortByName());
-            if (sortByTypeButton) sortByTypeButton.onClick.AddListener(() => _controller.SortByType()); 
-            if (sortByCountButton) sortByCountButton.onClick.AddListener(() => _controller.SortByCount());
-            if (dropButton) dropButton.onClick.AddListener(() => OnDrop());
-            if (useButton) useButton.onClick.AddListener(() => OnUse());
-        }
+        buttonsPanel.Init(controller);
     }
-
-
-    private void OnDrop()
-    {
-        if (!_controller.InventorySelection.HasSelection) return;
-        _controller.RequestDrop(_controller.InventorySelection.SelectedIndex);
-        _controller.InventorySelection.Clear();
-    }
-    private void OnUse()
-    {
-        if (!_controller.InventorySelection.HasSelection) return;
-        _controller.RequestUse(_controller.InventorySelection.SelectedIndex);
-    }
-
     public void UpdateSlot(int index, InventorySlot slot)
     {
         slots[index].SetData(slot);

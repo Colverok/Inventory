@@ -1459,6 +1459,7 @@ GameObject:
   - component: {fileID: 1199863146}
   - component: {fileID: 1199863148}
   - component: {fileID: 1199863147}
+  - component: {fileID: 1199863149}
   m_Layer: 0
   m_Name: Inventory Slots
   m_TagString: Untagged
@@ -1504,11 +1505,7 @@ MonoBehaviour:
   slotPrefab: {fileID: 7806943071655380627, guid: f945cc92c48a6484cadb6a1f7912c851, type: 3}
   dragGhost: {fileID: 636584705}
   tooltip: {fileID: 1161236933}
-  sortByNameButton: {fileID: 5005737792519887046}
-  sortByTypeButton: {fileID: 7018900611517963880}
-  sortByCountButton: {fileID: 71591925317369818}
-  dropButton: {fileID: 1288701988}
-  useButton: {fileID: 1013902564}
+  buttonsPanel: {fileID: 1199863149}
 --- !u!114 &1199863147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,6 +1544,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199863143}
   m_CullTransparentMesh: 1
+--- !u!114 &1199863149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199863143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dece614e96faab4abf7345f21f82c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortByNameButton: {fileID: 5005737792519887046}
+  sortByTypeButton: {fileID: 7018900611517963880}
+  sortByCountButton: {fileID: 71591925317369818}
+  dropButton: {fileID: 1288701988}
+  useButton: {fileID: 1013902564}
 --- !u!1 &1257667758
 GameObject:
   m_ObjectHideFlags: 0

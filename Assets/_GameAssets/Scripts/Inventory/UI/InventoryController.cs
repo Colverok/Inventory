@@ -84,17 +84,17 @@ public class InventoryController : MonoBehaviour
 
 
     // Sorting
-    public void SortByName()
+    public void SortByName(bool ascending)
     {
-        inventoryModel.SortBy(x => x.DisplayName);
+        inventoryModel.SortBy(x => x.DisplayName, ascending);
     }
-    public void SortByType()
+    public void SortByType(bool ascending)
     {
-        inventoryModel.SortBy(x => x.Type);
+        inventoryModel.SortBy(x => x.Type, ascending);
     }
-    public void SortByCount()
+    public void SortByCount(bool ascending)
     {
-        inventoryModel.SortBy(x => x.Count);
+        inventoryModel.SortBy(x => x.Count, ascending);
     }
 
     // Save/Load
