@@ -93,6 +93,7 @@ public class InventorySlotView : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         ghost.Move(eventData.position);
+        HideTooltip();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -119,6 +120,10 @@ public class InventorySlotView : MonoBehaviour,
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (_slot.IsEmpty)
+        {
+            return;
+        }
         float t = Time.unscaledTime;
         if (t - lastClickTime < doubleClickDelay)
         {
