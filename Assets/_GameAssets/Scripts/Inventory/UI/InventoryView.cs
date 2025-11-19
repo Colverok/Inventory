@@ -37,7 +37,8 @@ public class InventoryView : MonoBehaviour
         if (_controller)
         {
             if (sortByNameButton) sortByNameButton.onClick.AddListener(() => _controller.SortByName());
-            if (sortByTypeButton) sortByTypeButton.onClick.AddListener(() => _controller.SortByType());
+            if (sortByTypeButton) sortByTypeButton.onClick.AddListener(() => _controller.SortByType()); 
+            if (sortByCountButton) sortByCountButton.onClick.AddListener(() => _controller.SortByCount());
             if (dropButton) dropButton.onClick.AddListener(() => OnDrop());
             if (useButton) useButton.onClick.AddListener(() => OnUse());
         }

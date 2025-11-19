@@ -66,6 +66,10 @@ public class InventoryController : MonoBehaviour
     {
         InventoryModel.Add(new InventorySlot(item.Id, 1));
     }
+    public void RequestAdd(InventoryItemSO item, int count)
+    {
+        InventoryModel.Add(new InventorySlot(item.Id, count));
+    }
 
     public void RequestSelect(int index)
     {
