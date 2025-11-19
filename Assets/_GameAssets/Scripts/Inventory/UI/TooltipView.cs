@@ -33,7 +33,6 @@ public class TooltipView : MonoBehaviour
             screenPos, canvas.worldCamera, out var localPoint);
         rect.SetParent(canvasRect, false);
         rect.anchoredPosition = localPoint + new Vector2(rect.rect.width * 0.5f, -rect.rect.height * 0.5f);
-        //rect.position = anchor.position + new Vector3(rect.rect.width * 0.5f, -rect.rect.height * 0.5f, 0f);
         canvasGroup.alpha = 1f;
     }
 

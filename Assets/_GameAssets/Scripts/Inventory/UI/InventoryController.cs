@@ -32,7 +32,6 @@ public class InventoryController : MonoBehaviour
         inventoryModel = new InventoryModel(db, rows, cols);
         inventorySelection = new InventorySelection();
         inventoryModel.OnSlotChanged += OnSlotChanged;
-
         view.Init(this);
 
         InventorySaveService.TryLoad(InventoryModel);

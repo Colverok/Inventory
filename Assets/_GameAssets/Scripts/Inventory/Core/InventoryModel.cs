@@ -6,8 +6,8 @@ using System;
 [Serializable]
 public struct InventorySlot
 {
-    private string itemId;
-    private int count;
+    [SerializeField] private string itemId;
+    [SerializeField] private int count;
 
     #region Properties
     public string ItemId { get => itemId; set => itemId = value; }
